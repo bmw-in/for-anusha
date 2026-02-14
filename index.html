@@ -7,15 +7,17 @@
 
 <style>
 :root{
-  --bg1:#ffeef5;
-  --bg2:#f3e8ff;
+  --bg1:#ffd6e7;
+  --bg2:#e6ccff;
+  --bg3:#ffe0cc;
   --text:#5a3b4d;
-  --card:#ffffffcc;
+  --card:#ffffffdd;
 }
 
 body.dark{
   --bg1:#1e1b2e;
-  --bg2:#2b1f3a;
+  --bg2:#2a1f40;
+  --bg3:#3a1f2f;
   --text:#ffd9ec;
   --card:#2b233acc;
 }
@@ -23,79 +25,71 @@ body.dark{
 body{
   margin:0;
   height:100vh;
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  background: linear-gradient(135deg,var(--bg1),var(--bg2));
   overflow:hidden;
+  font-family: "Comic Sans MS", cursive;
+  color:var(--text);
   display:flex;
   justify-content:center;
   align-items:center;
-  color:var(--text);
-  transition:0.6s;
+  background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3));
+  background-size:400% 400%;
+  animation:bgMove 12s infinite alternate;
 }
 
-/* Theme toggle */
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  100%{background-position:100% 50%;}
+}
+
+/* Toggle */
 .toggle{
   position:fixed;
   top:15px;
   right:15px;
-  cursor:pointer;
   font-size:22px;
+  cursor:pointer;
   background:var(--card);
   padding:8px 12px;
   border-radius:20px;
-  backdrop-filter: blur(10px);
 }
 
-/* Floating hearts */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  font-size:18px;
-  opacity:.7;
-  animation: floatUp linear forwards;
-}
-
-@keyframes floatUp{
-  to{
-    transform: translateY(-110vh) rotate(360deg);
-    opacity:0;
-  }
-}
-
-/* Gift box */
+/* Gift */
 #gift{
   text-align:center;
   cursor:pointer;
-  user-select:none;
   animation: glow 2s infinite alternate;
 }
 
-@keyframes glow{
-  from{ filter: drop-shadow(0 0 10px #ff9ecd);}
-  to{ filter: drop-shadow(0 0 25px #ff4fa3);}
-}
-
 .box{
-  font-size:90px;
+  font-size:100px;
+  animation:bounce 2s infinite;
 }
 
 .note{
-  margin-top:10px;
-  font-size:22px;
+  font-size:24px;
 }
 
-/* Message card */
+@keyframes glow{
+  from{filter:drop-shadow(0 0 10px hotpink);}
+  to{filter:drop-shadow(0 0 25px deeppink);}
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+/* Card */
 #card{
   display:none;
-  max-width:500px;
-  padding:30px;
-  border-radius:25px;
+  max-width:650px;
+  padding:35px;
+  border-radius:30px;
   background:var(--card);
-  backdrop-filter: blur(15px);
   text-align:center;
-  line-height:1.6;
-  box-shadow:0 10px 30px #ff9ecd55;
-  animation: pop 1s forwards;
+  backdrop-filter: blur(15px);
+  box-shadow:0 10px 40px #ff9ecd55;
+  animation:pop 1s forwards;
 }
 
 @keyframes pop{
@@ -103,28 +97,61 @@ body{
   to{transform:scale(1);opacity:1;}
 }
 
-.reveal span{
-  opacity:0;
-  display:inline-block;
-  animation: reveal 0.04s forwards;
+h1{
+  font-size:38px;
+  margin:0;
+  animation:wiggle 2s infinite;
 }
 
-@keyframes reveal{
-  to{opacity:1;}
+@keyframes wiggle{
+  0%,100%{transform:rotate(0);}
+  25%{transform:rotate(-2deg);}
+  75%{transform:rotate(2deg);}
 }
 
-/* Confetti */
-.confetti{
+p{
+  font-size:18px;
+  line-height:1.7;
+  white-space:pre-line;
+}
+
+/* Floating hearts */
+.heart{
   position:fixed;
+  bottom:-20px;
   font-size:20px;
-  animation: confettiFall 3s linear forwards;
+  animation:floatUp linear forwards;
 }
 
-@keyframes confettiFall{
+@keyframes floatUp{
   to{
-    transform: translateY(110vh) rotate(720deg);
+    transform:translateY(-110vh) rotate(360deg);
     opacity:0;
   }
+}
+
+/* Sparkles */
+.sparkle{
+  position:fixed;
+  font-size:18px;
+  animation:spark 1.5s linear forwards;
+}
+
+@keyframes spark{
+  to{
+    transform:translateY(-80px) scale(0);
+    opacity:0;
+  }
+}
+
+button{
+  margin-top:15px;
+  padding:10px 18px;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+  background:linear-gradient(45deg,#ff9ecd,#ffcce6);
 }
 </style>
 </head>
@@ -139,78 +166,78 @@ body{
 </div>
 
 <div id="card">
-  <h2>For Anusha 💗</h2>
-  <p id="message" class="reveal"></p>
+  <h1>💖 For Anusha 💖<br>✨ My Favorite Person ✨</h1>
+
+  <p>
+Mera bacchaaaa 💗💗💗🥹🥹🥹✨  
+My Baddie 💗💗💗🎀🎀🎀🎀  
+
+Thank you for being there in my worst days.  
+You stayed by my side when I felt low.  
+You made me smile when things felt heavy.  
+
+You make life lighter just by being in it.  
+A friend like you is a real gift.  
+
+I’m so grateful for your presence in my life.  
+Your support means more than you know.  
+
+Love you always! 💝
+
+KHA JAUNGAAA 😋😋😋💗💗😝😝
+  </p>
+
+  <button onclick="location.reload()">Open Again 💝</button>
 </div>
 
 <script>
-/* Theme */
 function toggleTheme(){
   document.body.classList.toggle("dark");
 }
 
-/* Floating hearts loop */
+/* Hearts generator */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
-  h.innerHTML=["💗","💖","💝","💞"][Math.floor(Math.random()*4)];
+  h.innerHTML=["💗","💖","💝","💞"][Math.random()*4|0];
   h.style.left=Math.random()*100+"vw";
   h.style.animationDuration=4+Math.random()*4+"s";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
-},500);
+},400);
 
-/* Gift open */
-function openGift(){
-  document.getElementById("gift").style.display="none";
-  launchConfetti();
-  showMessage();
-}
-
-/* Confetti */
-function launchConfetti(){
-  for(let i=0;i<60;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.innerHTML=["💗","✨","💖","🎀"][Math.floor(Math.random()*4)];
-    c.style.left=Math.random()*100+"vw";
-    c.style.top="-20px";
-    c.style.animationDuration=2+Math.random()*2+"s";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),4000);
+/* Sparkles burst */
+function sparkles(x,y){
+  for(let i=0;i<25;i++){
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.innerHTML=["✨","💖","💗"][Math.random()*3|0];
+    s.style.left=x+"px";
+    s.style.top=y+"px";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1500);
   }
 }
 
-/* Typewriter reveal */
-function showMessage(){
-  const text=`Mera bacchaaaa 💗💗💗🥹🥹🥹✨
+/* Cute sound */
+function playMagic(){
+  let ctx=new (window.AudioContext||window.webkitAudioContext)();
+  let o=ctx.createOscillator();
+  let g=ctx.createGain();
+  o.type="sine";
+  o.frequency.value=520;
+  o.connect(g);
+  g.connect(ctx.destination);
+  o.start();
+  g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+1);
+}
 
-My Baddie 💗💗💗🎀🎀🎀🎀
-
-Thank you for being there in my worst days.
-You stayed by my side when I felt low.
-You made me smile when things felt heavy.
-
-You make life lighter just by being in it.
-A friend like you is a real gift.
-
-I’m so grateful for your presence in my life.
-Your support means more than you know.
-
-Love you always! 💝`;
-
-  const msg=document.getElementById("message");
-  const card=document.getElementById("card");
-  card.style.display="block";
-
-  let delay=0;
-  text.split("").forEach(ch=>{
-    let span=document.createElement("span");
-    span.textContent=ch;
-    span.style.animationDelay=delay+"s";
-    msg.appendChild(span);
-    delay+=0.04;
-  });
+/* Open gift */
+function openGift(){
+  playMagic();
+  sparkles(innerWidth/2,innerHeight/2);
+  document.getElementById("gift").style.display="none";
+  document.getElementById("card").style.display="block";
 }
 </script>
 
