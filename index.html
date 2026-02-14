@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Anusha 💝</title>
+
+<style>
+:root{
+  --bg1:#ffeef5;
+  --bg2:#f3e8ff;
+  --text:#5a3b4d;
+  --card:#ffffffcc;
+}
+
+body.dark{
+  --bg1:#1e1b2e;
+  --bg2:#2b1f3a;
+  --text:#ffd9ec;
+  --card:#2b233acc;
+}
+
+body{
+  margin:0;
+  height:100vh;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:var(--text);
+  transition:0.6s;
+}
+
+/* Theme toggle */
+.toggle{
+  position:fixed;
+  top:15px;
+  right:15px;
+  cursor:pointer;
+  font-size:22px;
+  background:var(--card);
+  padding:8px 12px;
+  border-radius:20px;
+  backdrop-filter: blur(10px);
+}
+
+/* Floating hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  opacity:.7;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp{
+  to{
+    transform: translateY(-110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* Gift box */
+#gift{
+  text-align:center;
+  cursor:pointer;
+  user-select:none;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{ filter: drop-shadow(0 0 10px #ff9ecd);}
+  to{ filter: drop-shadow(0 0 25px #ff4fa3);}
+}
+
+.box{
+  font-size:90px;
+}
+
+.note{
+  margin-top:10px;
+  font-size:22px;
+}
+
+/* Message card */
+#card{
+  display:none;
+  max-width:500px;
+  padding:30px;
+  border-radius:25px;
+  background:var(--card);
+  backdrop-filter: blur(15px);
+  text-align:center;
+  line-height:1.6;
+  box-shadow:0 10px 30px #ff9ecd55;
+  animation: pop 1s forwards;
+}
+
+@keyframes pop{
+  from{transform:scale(.5);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+.reveal span{
+  opacity:0;
+  display:inline-block;
+  animation: reveal 0.04s forwards;
+}
+
+@keyframes reveal{
+  to{opacity:1;}
+}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  font-size:20px;
+  animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall{
+  to{
+    transform: translateY(110vh) rotate(720deg);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="toggle" onclick="toggleTheme()">🌙</div>
+
+<div id="gift" onclick="openGift()">
+  <div class="box">🎁</div>
+  <div class="note">Tap to Open 💝</div>
+</div>
+
+<div id="card">
+  <h2>For Anusha 💗</h2>
+  <p id="message" class="reveal"></p>
+</div>
+
+<script>
+/* Theme */
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+}
+
+/* Floating hearts loop */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML=["💗","💖","💝","💞"][Math.floor(Math.random()*4)];
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=4+Math.random()*4+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},500);
+
+/* Gift open */
+function openGift(){
+  document.getElementById("gift").style.display="none";
+  launchConfetti();
+  showMessage();
+}
+
+/* Confetti */
+function launchConfetti(){
+  for(let i=0;i<60;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.innerHTML=["💗","✨","💖","🎀"][Math.floor(Math.random()*4)];
+    c.style.left=Math.random()*100+"vw";
+    c.style.top="-20px";
+    c.style.animationDuration=2+Math.random()*2+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+}
+
+/* Typewriter reveal */
+function showMessage(){
+  const text=`Mera bacchaaaa 💗💗💗🥹🥹🥹✨
+
+My Baddie 💗💗💗🎀🎀🎀🎀
+
+Thank you for being there in my worst days.
+You stayed by my side when I felt low.
+You made me smile when things felt heavy.
+
+You make life lighter just by being in it.
+A friend like you is a real gift.
+
+I’m so grateful for your presence in my life.
+Your support means more than you know.
+
+Love you always! 💝`;
+
+  const msg=document.getElementById("message");
+  const card=document.getElementById("card");
+  card.style.display="block";
+
+  let delay=0;
+  text.split("").forEach(ch=>{
+    let span=document.createElement("span");
+    span.textContent=ch;
+    span.style.animationDelay=delay+"s";
+    msg.appendChild(span);
+    delay+=0.04;
+  });
+}
+</script>
+
+</body>
+</html>
